@@ -1,0 +1,40 @@
+.list {
+  text-align: left;
+  max-width: 850px;
+  margin: auto;
+  padding-right: 5px;
+}
+.list-group-item {
+  margin-left: -50px;
+  padding-left: 5%;
+}
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+
+}
+
+.custom-checkbox:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.custom-checkbox:checked::before {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background-color: white;
+}
+.list-group-item {
+  user-select: none;
+}
+.list-group-item * {
+  user-select: none;
+}
+.list-group-item.active {
+  outline: none;
+}

@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
-import { TutorialDetailsComponent } from './components/tutorial-details/tutorial-details.component';
-import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
+import { AddTodoComponent } from './components/add-todo/add-todo.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
-  { path: 'tutorials', component: TutorialsListComponent },
-  { path: 'tutorials/:id', component: TutorialDetailsComponent },
-  { path: 'add', component: AddTutorialComponent }
+  { path: '', redirectTo: 'todo', pathMatch: 'full' },
+  { path: 'todo', component: TodoListComponent },
+  { path: 'todo/:id', component: TodoDetailsComponent },
+  { path: 'add', component: AddTodoComponent }
 ];
 
 @NgModule({

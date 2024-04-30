@@ -1,26 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TutorialService } from 'src/app/services/tutorial.service';
+import { TodoService } from 'src/app/services/todo.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Tutorial } from 'src/app/models/tutorial.model';
+import { Todo } from 'src/app/models/todo.model';
 
 @Component({
-  selector: 'app-tutorial-details',
-  templateUrl: './tutorial-details.component.html',
-  styleUrls: ['./tutorial-details.component.css'],
+  selector: 'app-todo-details',
+  templateUrl: './todo-details.component.html',
+  styleUrls: ['./todo-details.component.css'],
 })
-export class TutorialDetailsComponent {
+export class TodoDetailsComponent {
   @Input() viewMode = false;
 
-  @Input() currentTutorial: Tutorial = {
+  @Input() currentTodo: Todo = {
     title: '',
     description: '',
-    published: false
+    completed: false
   };
 
   message = '';
 
   constructor(
-    private tutorialService: TutorialService,
+    private TodoService: TodoService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -28,14 +28,14 @@ export class TutorialDetailsComponent {
   ngOnInit(): void {
     if (!this.viewMode) {
       this.message = '';
-      this.getTutorial(this.route.snapshot.params['id']);
+      this.getTodo(this.route.snapshot.params['id']);
     }
   }
 
-  getTutorial(id: string): void {
-    this.tutorialService.get(id).subscribe({
+  getTodo(id: number): void {
+    this.TodoService.get(id).subscribe({
       next: (data) => {
-        this.currentTutorial = data;
+        this.currentTodo = data;
         console.log(data);
       },
       error: (e) => console.error(e)
@@ -44,17 +44,17 @@ export class TutorialDetailsComponent {
 
   updatePublished(status: boolean): void {
     const data = {
-      title: this.currentTutorial.title,
-      description: this.currentTutorial.description,
+      title: this.currentTodo.title,
+      description: this.currentTodo.description,
       published: status
     };
 
     this.message = '';
 
-    this.tutorialService.update(this.currentTutorial.id, data).subscribe({
+    this.TodoService.update(this.currentTodo.id, data).subscribe({
       next: (res) => {
         console.log(res);
-        this.currentTutorial.published = status;
+        this.currentTodo.completed = status;
         this.message = res.message
           ? res.message
           : 'The status was updated successfully!';
@@ -63,27 +63,27 @@ export class TutorialDetailsComponent {
     });
   }
 
-  updateTutorial(): void {
+  updateTodo(): void {
     this.message = '';
 
-    this.tutorialService
-      .update(this.currentTutorial.id, this.currentTutorial)
+    this.TodoService
+      .update(this.currentTodo.id, this.currentTodo)
       .subscribe({
         next: (res) => {
           console.log(res);
           this.message = res.message
             ? res.message
-            : 'This tutorial was updated successfully!';
+            : 'This Todo was updated successfully!';
         },
         error: (e) => console.error(e)
       });
   }
 
-  deleteTutorial(): void {
-    this.tutorialService.delete(this.currentTutorial.id).subscribe({
+  deleteTodo(): void {
+    this.TodoService.delete(this.currentTodo.id).subscribe({
       next: (res) => {
         console.log(res);
-        this.router.navigate(['/tutorials']);
+        this.router.navigate(['/todo']);
       },
       error: (e) => console.error(e)
     });
