@@ -1,6 +1,5 @@
 // Karma configuration
 // Generated on Fri May 10 2024 10:36:55 GMT+0530 (India Standard Time)
-process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 module.exports = function(config) {
   config.set({
@@ -59,7 +58,11 @@ module.exports = function(config) {
     customLaunchers: {
       ChromeHeadlessCI: {
         base: 'ChromeHeadless',
-        flags: ['--no-sandbox', '--disable-gpu']
+        flags: [
+          '--no-sandbox', 
+          '--disable-gpu',
+          '--headless'
+        ]
       }
     },
 
