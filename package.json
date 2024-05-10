@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "README-postinstall": "The chromedriver version must support the chrome version installed via puppeteer. Chromedriver 76.0.3809.68 supports Chrome 76. See https://chromedriver.chromium.org/downloads for version matching.",
-    "postinstall": "webdriver-manager update --standalone false --gecko false --versions.chrome 114.0.5735.16"
+    "postinstall": "webdriver-manager update --standalone false --gecko false --versions.chrome 76.0.3809.68"
 
   },
   "private": true,
@@ -33,7 +33,7 @@
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
-    "karma-chrome-launcher": "~3.2.0",
+    "karma-chrome-launcher": "~2.2.0",
     "karma-coverage": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~5.1.0",
