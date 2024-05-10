@@ -26,6 +26,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: export DISPLAY=$HOST_IP:10.0 && /usr/bin/google-chrome
     - run: npm install
     - run: npm test
