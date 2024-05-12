@@ -17,10 +17,18 @@ module.exports = function (config) {
     },
     coverageReporter: {
       dir: require('path').join(__dirname, '../coverage'),
-      reports: ['html', 'lcovonly'],
-      fixWebpackSourcePaths: true
+      subdir: '.',
+      reporters: [
+        {type: 'html', subdir: './'},
+        {type: 'lcovonly', subdir: './'},
+      ],
+      fixWebpackSourcePaths: true,
+      includeAllSource: true
     },
-    reporters: ['progress', 'kjhtml'],
+    preprocessors: {
+      '**/!(config/constants/mocks/environments)/**/!(*.module|*.spec).ts' : ['coverage']
+    },
+    reporters: ['progress','kjhtml','coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
