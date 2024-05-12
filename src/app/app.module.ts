@@ -14,7 +14,7 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
     AppComponent,
     AddTodoComponent,
     TodoDetailsComponent,
-    TodoListComponent
+    TodoListComponent,
   ],
   imports: [
     BrowserModule,

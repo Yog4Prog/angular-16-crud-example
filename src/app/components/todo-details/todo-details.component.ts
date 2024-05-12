@@ -20,10 +20,10 @@ export class TodoDetailsComponent {
   message = '';
 
   constructor(
-    private TodoService: TodoService,
+    private todoService: TodoService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (!this.viewMode) {
@@ -33,13 +33,25 @@ export class TodoDetailsComponent {
   }
 
   getTodo(id: number): void {
-    this.TodoService.get(id).subscribe({
-      next: (data) => {
-        this.currentTodo = data;
-        console.log(data);
-      },
-      error: (e) => console.error(e)
-    });
+    /* this.todoService.get(id).subscribe({
+       next: (data) => {
+         this.currentTodo = data;
+         console.log(data);
+       },
+       error: (e) => console.error(e)
+     }); */
+    const todoObservable = this.todoService.get(id);
+    if (todoObservable) {
+      todoObservable.subscribe({
+        next: (data) => {
+          this.currentTodo = data;
+          console.log(data);
+        },
+        error: (e) => console.error(e)
+      });
+    } else {
+      console.error('TodoService.get(id) returned undefined.');
+    }
   }
 
   updatePublished(status: boolean): void {
@@ -51,7 +63,7 @@ export class TodoDetailsComponent {
 
     this.message = '';
 
-    this.TodoService.update(this.currentTodo.id, data).subscribe({
+    this.todoService.update(this.currentTodo.id, data).subscribe({
       next: (res) => {
         console.log(res);
         this.currentTodo.completed = status;
@@ -66,7 +78,7 @@ export class TodoDetailsComponent {
   updateTodo(): void {
     this.message = '';
 
-    this.TodoService
+    this.todoService
       .update(this.currentTodo.id, this.currentTodo)
       .subscribe({
         next: (res) => {
@@ -80,7 +92,7 @@ export class TodoDetailsComponent {
   }
 
   deleteTodo(): void {
-    this.TodoService.delete(this.currentTodo.id).subscribe({
+    this.todoService.delete(this.currentTodo.id).subscribe({
       next: (res) => {
         console.log(res);
         this.router.navigate(['/todo']);

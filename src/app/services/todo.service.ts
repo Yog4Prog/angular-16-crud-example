@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { STATUS, Todo } from '../models/todo.model';
@@ -10,7 +9,7 @@ import { STATUS, Todo } from '../models/todo.model';
 export class TodoService {
   todos: Todo[]
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.todos = [
       {
         id: 1,
@@ -41,10 +40,16 @@ export class TodoService {
   }
 
   get(id: number): Observable<any> {
-    return of(this.todos).pipe(
+   /* return of(this.todos).pipe(
       // Use the map operator to transform the array into a single Todo object
       map(todos => todos.find(todo => todo.id == id))
-    );
+    ); */
+    const foundTodo = this.todos.find(todo => todo.id === id);
+    if (foundTodo) {
+      return of(foundTodo);
+    } else {
+      return throwError(`Todo with ID ${id} not found`);
+    }
   }
   getAll(): Observable<Todo[]> {
     return of(this.todos);
