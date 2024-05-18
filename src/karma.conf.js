@@ -39,7 +39,7 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['ChromeHeadless'],
     customLaunchers: {
-      Chrome: {
+      ChromeHeadless: {
         base: 'ChromeHeadless',
         chromeDataDir: require('path').resolve(__dirname, '.chrome'),
         flags: [
