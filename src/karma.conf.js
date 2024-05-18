@@ -40,7 +40,7 @@ module.exports = function (config) {
     browsers: ['ChromeHeadless'],
     customLaunchers: {
       ChromeHeadless: {
-        base: 'ChromeHeadless',
+        base: 'Chrome',
         chromeDataDir: require('path').resolve(__dirname, '.chrome'),
         flags: [
           '--no-sandbox', 
