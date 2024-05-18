@@ -37,11 +37,10 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessB'],
     customLaunchers: {
-      ChromeHeadless: {
-        base: 'Chrome',
-        chromeDataDir: require('path').resolve(__dirname, '.chrome'),
+      ChromeHeadlessB: {
+        base: 'ChromeHeadless',
         flags: [
           '--no-sandbox', 
           '--disable-gpu',
