@@ -12,6 +12,7 @@ describe('AppComponent', () => {
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
+    //console.log(`Process ENV CHROME_BIN : ${process.env.toString()}`);
     expect(app).toBeTruthy();
   });
 

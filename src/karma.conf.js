@@ -42,6 +42,7 @@ module.exports = function (config) {
         flags: [
           '--no-sandbox', 
           '--disable-gpu',
+          '--headless',
           '--disable-translate',
           '--disable-extensions'
         ]
