@@ -1,5 +1,6 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
+const process = require('process');
 process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 module.exports = function (config) {
@@ -46,7 +47,8 @@ module.exports = function (config) {
           '--disable-gpu',
           '--headless',
           '--disable-translate',
-          '--disable-extensions'
+          '--disable-extensions',
+          '--disable-dev-shm-usage'
         ]
       }
     },
