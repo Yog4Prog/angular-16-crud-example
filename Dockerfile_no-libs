@@ -1,0 +1,21 @@
+# Use an official Ubuntu runtime as a parent image
+FROM ubuntu:20.04
+
+# Prevent prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install dependencies
+RUN apt-get update
+RUN apt-get install -y curl software-properties-common
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get install -y nodejs
+RUN node -v && npm -v
+RUN 
+RUN apt-get install -y \
+  git 
+
+# Expose port 9876 for Karma
+EXPOSE 9876
+
+# Define the command to run the tests
+CMD ["tail", "-f", "/dev/null"]
