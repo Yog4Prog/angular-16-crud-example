@@ -2,7 +2,7 @@
 $GITHUB_USER = "Yog4Prog"
 $GITHUB_REPO = "AZSampleWebApp"
 $GIT_BASE = "https://api.github.com/repos"
-
+$GITHUB_TOKEN = ""
 
 # Function to fetch contents of a directory and look for .csproj files
 function Fetch-CsprojFilesTargetVersion {
@@ -20,7 +20,7 @@ function Fetch-CsprojFilesTargetVersion {
     foreach ($file in $csprojFiles) {
         $csprojPath = $file.path
         $fileContentUrl = $file.download_url
-        $targetFramework = Fetch-TargetFramework -FileUrl $fileContentUrl
+        $targetFramework = Fetch-TargetFrameworkFromRegex -FileUrl $fileContentUrl
         $global:found = $true  # Set a global flag indicating a .csproj file was found
         return $targetFramework # Break after finding the first .csproj file
   
@@ -60,8 +60,37 @@ function Fetch-TargetFramework {
         $targetFramework = $xml.Project.PropertyGroup.TargetFrameworks
     }
     return $targetFramework;
+}
+# Function to fetch and parse the TargetFramework from a .csproj file using regex
+function Fetch-TargetFrameworkFromRegex {
+    param (
+        [string]$FileUrl
+    )
 
+    $headers = @{
+        Authorization = "token $GITHUB_TOKEN"
+    }
+
+    $fileContent = Invoke-RestMethod -Uri $FileUrl -Headers $headers
+
+    # Convert the content to a string if it's an XML document
+    if ($fileContent -is [xml]) {
+            $fileContent = $fileContent.OuterXml
+    }
     
+    # Use regex to find the TargetFramework element
+    $targetFrameworkRegex = '<TargetFramework>(.*?)<\/TargetFramework>'
+    $targetFrameworksRegex = '<TargetFrameworks>(.*?)<\/TargetFrameworks>'
+    
+    $targetFrameworkMatch = [regex]::Match($fileContent, $targetFrameworkRegex)
+    $targetFrameworksMatch = [regex]::Match($fileContent, $targetFrameworksRegex)
+    if ($targetFrameworkMatch.Success) {
+        return $targetFrameworkMatch.Groups[1].Value
+    } elseif ($targetFrameworksMatch.Success) {
+        return $targetFrameworksMatch.Groups[1].Value
+    } else {
+        return $null
+    }
 }
 
 # Read the gitrepodetails.txt file and process each line
