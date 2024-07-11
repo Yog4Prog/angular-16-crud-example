@@ -2,7 +2,7 @@
 $GITHUB_USER = "Yog4Prog"
 $GITHUB_REPO = "AZSampleWebApp"
 $GIT_BASE = "https://api.github.com/repos"
-$GITHUB_TOKEN = "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"
+$GITHUB_TOKEN = ""
 
 # Function to fetch contents of a directory and look for .csproj files
 function Fetch-CsprojFilesTargetVersion {
