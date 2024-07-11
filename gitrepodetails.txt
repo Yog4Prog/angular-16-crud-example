@@ -1,0 +1,4 @@
+Yog4Prog/AZSampleWebApp
+Yog4Prog/dotnetApp1
+Yog4Prog/DotnetApp2
+Yog4Prog/DotnetApp3

@@ -1,5 +1,5 @@
 {
-  "name": "angular-16-crud",
+  "name": "@home-network/angular-16-crud",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -40,3 +40,4 @@
     "typescript": "~5.0.2"
   }
 }
+
